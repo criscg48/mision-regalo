@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Misión regalo</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../css/miEstilo.css">
+</head>
+
+<body class="teal">
+  <div class="bg">
+    <nav class="brown lighten-3">
+      <div class="nav-wrapper">
+        <a href="../index.html" class="brand-logo">
+          <i class="material-icons">home</i>
+        </a>
+      </div>
+    </nav>
+
+    <header>
+      <br><br>
+      <h6 class="white-text center-align">Hoy no hay pistas </br> ¡Busca, busca!</h6>
+    </header>
+
+    <br><br>
+
+    <main class="container" id="contenedor">
+      <div class="row">
+        <div class="center-align">
+          <form id="espacio">
+            <table border="2px" bordercolor="#050430" bgcolor="#e2dee1">
+              <tr>
+                <th width="30" height="30" id="celda1">J</th>
+                <th width="30" height="30" id="celda2" onclick="comprobar2()">B</th>
+                <th width="30" height="30" id="celda3" onclick="comprobar3()">A</th>
+                <th width="30" height="30" id="celda4" onclick="comprobar4()">Ñ</th>
+                <th width="30" height="30" id="celda5" onclick="comprobar5()">O</th>
+                <th width="30" height="30" id="celda6">C</th>
+                <th width="30" height="30" id="celda7">R</th>
+                <th width="30" height="30">Z</th>
+              </tr>
+
+              <tr>
+                <th width="30" height="30">M</th>
+                <th width="30" height="30">N</th>
+                <th width="30" height="30" id="celdaB3" onclick="comprobarB3()">A</th>
+                <th width="30" height="30">O</th>
+                <th width="30" height="30">P</th>
+                <th width="30" height="30">R</th>
+                <th width="30" height="30">A</th>
+                <th width="30" height="30">B</th>
+              </tr>
+
+              <tr>
+                <th width="30" height="30">Z</th>
+                <th width="30" height="30">Q</th>
+                <th width="30" height="30">I</th>
+                <th width="30" height="30" id="celdaC4" onclick="comprobarC4()">R</th>
+                <th width="30" height="30">T</th>
+                <th width="30" height="30">E</th>
+                <th width="30" height="30">U</th>
+                <th width="30" height="30">W</th>
+              </tr>
+
+              <tr>
+                <th width="30" height="30">J</th>
+                <th width="30" height="30">C</th>
+                <th width="30" height="30" id="celdaD3" onclick="comprobarD3()">C</th>
+                <th width="30" height="30">A</th>
+                <th width="30" height="30" id="celdaD5" onclick="comprobarD5()">R</th>
+                <th width="30" height="30">J</th>
+                <th width="30" height="30">F</th>
+                <th width="30" height="30">L</th>
+              </tr>
+
+              <tr>
+                <th width="30" height="30">L</th>
+                <th width="30" height="30">A</th>
+                <th width="30" height="30" id="celdaE3" onclick="comprobarE3()">A</th>
+                <th width="30" height="30">O</th>
+                <th width="30" height="30">R</th>
+                <th width="30" height="30" id="celdaE6" onclick="comprobarE6()">I</th>
+                <th width="30" height="30">T</th>
+                <th width="30" height="30">O</th>
+              </tr>
+
+              <tr>
+                <th width="30" height="30">Z</th>
+                <th width="30" height="30">Q</th>
+                <th width="30" height="30" id="celdaF3" onclick="comprobarF3()">J</th>
+                <th width="30" height="30">X</th>
+                <th width="30" height="30">H</th>
+                <th width="30" height="30">R</th>
+                <th width="30" height="30" id="celdaF7" onclick="comprobarF7()">B</th>
+                <th width="30" height="30">T</th>
+              </tr>
+
+              <tr>
+                <th width="30" height="30">V</th>
+                <th width="30" height="30">Y</th>
+                <th width="30" height="30" id="celdaG3" onclick="comprobarG3()">O</th>
+                <th width="30" height="30">J</th>
+                <th width="30" height="30">A</th>
+                <th width="30" height="30">L</th>
+                <th width="30" height="30">O</th>
+                <th width="30" height="30" id="celdaG8" onclick="comprobarG8()">A</th>
+              </tr>
+
+              <tr>
+                <th width="30" height="30">T</th>
+                <th width="30" height="30">B</th>
+                <th width="30" height="30" id="celdaH3" onclick="comprobarH3()">N</th>
+                <th width="30" height="30">O</th>
+                <th width="30" height="30">K</th>
+                <th width="30" height="30">N</th>
+                <th width="30" height="30">I</th>
+                <th width="30" height="30">Q</th>
+              </tr>
+            </table>
+            <br>
+            <button class="waves-effect waves-light btn brown lighten-2" type="button"
+              onclick="comprobar()">Comprobar</button>
+          </form>
+        </div>
+    </main>
+    <script>
+
+      var a2, a3, a4, a5,
+        b3, c4, d5, e6, f7, g8,
+        d3, e3, f3, g3, h3;
+
+      //palabra BAÑO color rojo
+
+      function comprobar2() {
+        a2 = document.getElementById('celda2').style.color = "red";
+        a2 = true;
+      }
+      function comprobar3() {
+        a3 = document.getElementById('celda3').style.color = "red";
+        a3 = true;
+      }
+      function comprobar4() {
+        a4 = document.getElementById('celda4').style.color = "red";
+        a4 = true;
+      }
+
+      function comprobar5() {
+        a5 = document.getElementById('celda5').style.color = "red";
+        a5 = true;
+      }
+
+      //palabra ARRIBA color morado
+      function comprobarB3() {
+        b3 = document.getElementById('celdaB3').style.color = "blue";
+        b3 = true;
+      }
+
+      function comprobarC4() {
+        c4 = document.getElementById('celdaC4').style.color = "blue";
+        c4 = true;
+      }
+
+      function comprobarD5() {
+        d5 = document.getElementById('celdaD5').style.color = "blue";
+        d5 = true;
+      }
+
+      function comprobarE6() {
+        e6 = document.getElementById('celdaE6').style.color = "blue";
+        e6 = true;
+      }
+
+      function comprobarF7() {
+        f7 = document.getElementById('celdaF7').style.color = "blue";
+        f7 = true;
+      }
+
+      function comprobarG8() {
+        g8 = document.getElementById('celdaG8').style.color = "blue";
+        g8 = true;
+      }
+
+      //palabra CAJON
+      function comprobarD3() {
+        d3 = document.getElementById('celdaD3').style.color = "yellow";
+        d3 = true;
+      }
+      function comprobarE3() {
+        e3 = document.getElementById('celdaE3').style.color = "yellow";
+        e3 = true;
+      }
+      function comprobarF3() {
+        f3 = document.getElementById('celdaF3').style.color = "yellow";
+        f3 = true;
+      }
+      function comprobarG3() {
+        g3 = document.getElementById('celdaG3').style.color = "yellow";
+        g3 = true;
+      }
+      function comprobarH3() {
+        h3 = document.getElementById('celdaH3').style.color = "yellow";
+        h3 = true;
+      }
+
+      //Comprobar todo
+      function comprobar() {
+        if (a2 && a3 && a4 && a5 && b3 && c4 && d5 && e6 && f7 && g8 && d3 && e3 && f3 && g3 && h3) {
+          alert("No corras tanto, busca mejor dentro de la impresora");
+        } else {
+          alert("Vaya todavía te faltan letras o palabras");
+          document.location.reload(true)
+        }
+      }
+
+    </script>
+  </div>
+</body>
+
+</html>

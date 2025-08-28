@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Misión regalo</title>
+  <!-- Materialize CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Tu CSS externo con fondo -->
+  <link rel="stylesheet" type="text/css" href="../css/miEstilo.css">
+  <style>
+    /* Contenedor de tarjetas */
+    .sortable-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 20px;
+      justify-items: center;
+    }
+
+    .card {
+      cursor: grab;
+      width: 220px;
+      user-select: none;
+    }
+
+    .dragging {
+      opacity: 0.5;
+    }
+
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .vacaciones-img {
+      width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      .sortable-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      }
+
+      .card {
+        width: 180px;
+      }
+
+      .vacaciones-img {
+        width: 160px;
+        height: 120px;
+      }
+    }
+
+    #codeContainer {
+      margin-top: 20px;
+    }
+
+    .code-part {
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body class="teal">
+  <div class="bg">
+    <nav class="brown lighten-3">
+      <div class="nav-wrapper">
+        <a href="../index.html" class="brand-logo">
+          <i class="material-icons">home</i>
+        </a>
+      </div>
+    </nav>
+
+    <main class="container center-align">
+      <h2>📸 Juego: Ordena tus Vacaciones</h2>
+      <p>Arrastra las imágenes para colocarlas en orden cronológico 🏖️</p>
+
+      <!-- Contenedor de tarjetas DESORDENADAS -->
+      <div class="sortable sortable-container">
+        <div class="card teal brown lighten-2 white-text" draggable="true">
+          <div class="card-content">
+            <span class="card-title">Lisboa</span>
+            <img src="../media/2.jpg" class="vacaciones-img">
+          </div>
+        </div>
+        <div class="card teal brown lighten-2 white-text" draggable="true">
+          <div class="card-content">
+            <span class="card-title">Sevilla</span>
+            <img src="../media/1.jpg" class="vacaciones-img">
+          </div>
+        </div>
+        <div class="card teal brown lighten-2 white-text" draggable="true">
+          <div class="card-content">
+            <span class="card-title">Londres</span>
+            <img src="../media/4.jpg" class="vacaciones-img">
+          </div>
+        </div>
+        <div class="card teal brown lighten-2 white-text" draggable="true">
+          <div class="card-content">
+            <span class="card-title">Gibraltar</span>
+            <img src="../media/3.jpg" class="vacaciones-img">
+          </div>
+        </div>
+        <div class="card teal brown lighten-2 white-text" draggable="true">
+          <div class="card-content">
+            <span class="card-title">Budapest</span>
+            <img src="../media/6.jpg" class="vacaciones-img">
+          </div>
+        </div>
+        <div class="card teal brown lighten-2 white-text" draggable="true">
+          <div class="card-content">
+            <span class="card-title">Cabo de Gata</span>
+            <img src="../media/5.jpg" class="vacaciones-img">
+          </div>
+        </div>
+      </div>
+
+      <br>
+      <button id="checkOrder" class="btn brown lighten-1">Comprobar Orden</button>
+
+      <!-- Código secreto -->
+      <div id="codeContainer" class="hidden">
+        <h5>🎉 ¡Has ordenado todas las fotos correctamente!</h5>
+        <p class="brown lighten-2 white-text">El código secreto es: <span id="secretCode" class="code-part">VACACIONES123</span></p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    const sortable = document.querySelector(".sortable");
+    const checkBtn = document.getElementById("checkOrder");
+    const codeContainer = document.getElementById("codeContainer");
+
+    let draggedItem = null;
+
+    // Drag & Drop
+    sortable.addEventListener("dragstart", e => {
+      draggedItem = e.target;
+      e.target.classList.add("dragging");
+    });
+
+    sortable.addEventListener("dragend", e => {
+      e.target.classList.remove("dragging");
+      draggedItem = null;
+    });
+
+    sortable.addEventListener("dragover", e => {
+      e.preventDefault();
+      const afterElement = getDragAfterElement(sortable, e.clientY);
+      if (afterElement == null) {
+        sortable.appendChild(draggedItem);
+      } else {
+        sortable.insertBefore(draggedItem, afterElement);
+      }
+    });
+
+    function getDragAfterElement(container, y) {
+      const draggableElements = [...container.querySelectorAll(".card:not(.dragging)")];
+      return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+          return { offset: offset, element: child };
+        } else {
+          return closest;
+        }
+      }, { offset: Number.NEGATIVE_INFINITY }).element;
+    }
+
+    // Comprobar orden basado en el número de la foto
+    checkBtn.addEventListener("click", () => {
+      const items = sortable.querySelectorAll(".card");
+      let correct = true;
+
+      items.forEach((item, index) => {
+        const imgSrc = item.querySelector("img").src;
+        const match = imgSrc.match(/(\d+)\.jpg$/);
+        const num = match ? parseInt(match[1]) : 0;
+        if (num !== index + 1) correct = false;
+      });
+
+      if (correct) {
+        M.toast({ html: "✅ ¡Orden correcto!" });
+        codeContainer.classList.remove("hidden");
+      } else {
+        M.toast({ html: "❌ El orden no es correcto, inténtalo de nuevo." });
+        codeContainer.classList.add("hidden");
+      }
+    });
+  </script>
+</body>
+
+</html>

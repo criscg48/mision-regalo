@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Misión regalo</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../css/miEstilo.css">
+  
+</head>
+
+<body class="teal">
+  <div class="bg">
+    <nav class="brown lighten-3">
+      <div class="nav-wrapper">
+        <a href="../index.html" class="brand-logo">
+          <i class="material-icons">home</i>
+        </a>
+      </div>
+    </nav>
+    <main class="container" id="contenedor">
+
+      <div class="container center-align">
+        <h2>🎉 Trivial de Cumpleaños 🎉</h2>
+        <p>Responde correctamente para descubrir el código secreto 🎁</p>
+
+        <!-- Pregunta 1 -->
+        <div class="card quiz-card teal brown lighten-2 white-text">
+          <div class="card-content">
+            <span class="card-title">Pregunta 1</span>
+            <p>¿Cuál es mi serie favorita?</p>
+            <br>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="A1">Prison Break</button>
+            <button class="btn answer brown lighten-1" data-correct="false">La Casa de Papel</button>
+            <button class="btn answer brown lighten-1" data-correct="false">Juego de tronos</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 2 -->
+        <div class="card quiz-card teal brown lighten-2 white-text">
+          <div class="card-content">
+            <span class="card-title">Pregunta 2</span>
+            <p>¿Dónde hicimos el último viaje juntas?</p>
+            <br>
+            <button class="btn answer brown lighten-1" data-correct="false">Madrid</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="B7">Budapest</button>
+            <button class="btn answer brown lighten-1" data-correct="false">Lisboa</button>
+          </div>
+        </div>
+
+        <!-- Pregunta 3 -->
+        <div class="card quiz-card teal brown lighten-2 white-text">
+          <div class="card-content">
+            <span class="card-title">Pregunta 3</span>
+            <p>¿Cuál es mi comida favorita?</p>
+            <br>
+            <button class="btn answer brown lighten-1" data-correct="false">Hamburguesa</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="C9">Tortilla de patatas</button>
+            <button class="btn answer brown lighten-1" data-correct="false">Sushi</button>
+          </div>
+        </div>
+
+        <!-- Código secreto -->
+        <div id="codeContainer" class="hidden">
+          <h5>¡Has conseguido todas las respuestas! 🎉</h5>
+          <p class="brown lighten-2 white-text"> El código secreto es: <span id="secretCode" class="code-part"></span></p>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script>
+    let codeParts = [];
+    const answers = document.querySelectorAll('.answer');
+    const codeContainer = document.getElementById("codeContainer");
+    const secretCodeSpan = document.getElementById("secretCode");
+
+    answers.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (btn.dataset.correct === "true") {
+          if (!codeParts.includes(btn.dataset.code)) {
+            codeParts.push(btn.dataset.code);
+            M.toast({ html: "✅ Correcto, pista desbloqueada: " + btn.dataset.code });
+          } else {
+            M.toast({ html: "Ya respondiste esta pregunta" });
+          }
+        } else {
+          M.toast({ html: "❌ Ups, esa no es la respuesta" });
+        }
+
+        // Si tiene las 3 partes, mostrar el código
+        if (codeParts.length === 3) {
+          document.getElementById("secretCode").textContent = codeParts.join("-");
+          codeContainer.classList.remove("hidden");
+        }
+      });
+    });
+  </script>
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>

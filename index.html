@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Misión regalo</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="css/miEstilo.css">
+  <style>
+  /* Temporizador */
+    #demo {
+      font-size: 1.5rem;
+      font-family: "Courier New", monospace;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: inline-block;
+      margin-top: 15px;
+      letter-spacing: 2px;
+      color: white;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+    }
+
+    /* Botones de pistas */
+    .pistas-btn {
+      margin: 6px 4px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .pistas-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    }
+
+  </style>
+</head>
+
+<body class="teal mision-regalo">
+  <div class="bg">
+    <nav class="brown lighten-3">
+      <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">
+          <i class="material-icons">home</i>
+        </a>
+      </div>
+    </nav>
+
+    <header>
+      <h2 class="white-text center-align">Misión: Regalo de Cumpleaños</h2>
+      <h6 class="white-text center-align">Cada día tendrás una nueva pista</h6>
+    </header>
+
+    <main class="container center-align">
+      <div class="row">
+        <div class="center-align">
+          <!-- Pistas -->
+          <a id="pista1" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista4.html" style="display:none;">Pista 1</a><br><br>
+          <a id="pista2" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista5.html" style="display:none;">Pista 2</a><br><br>
+          <a id="pista3" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista6.html" style="display:none;">Pista 3</a><br><br>
+          <!-- Botón final -->
+          <a id="miEnlace" class="waves-effect waves-light btn brown lighten-2 pistas-btn" style="display:none;">Comprobar código</a>
+
+          <p class="white-text bold">Tiempo restante hasta la siguiente pista o hasta comprobar el código final:</p>
+          <p id="demo" class="flow-text"></p>
+        </div>
+      </div>
+    </main>
+
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+    <script>
+      // Fechas de desbloqueo de pistas
+      const pistas = [
+        { id: "pista1", fecha: new Date("Oct 21, 2025 10:00:00") },
+        { id: "pista2", fecha: new Date("Oct 22, 2025 10:00:00") },
+        { id: "pista3", fecha: new Date("Oct 23, 2025 10:00:00") }
+      ];
+
+      // Pista final
+      const enlaceFinal = { id: "miEnlace", fecha: new Date("Oct 24, 2025 00:00:00"), href: "pistas/pistafinal.html" };
+
+      const demo = document.getElementById("demo");
+
+      function actualizarPistas() {
+        const now = new Date().getTime();
+        let proximaFecha = null;
+
+        // Mostrar pistas desbloqueadas
+        pistas.forEach(p => {
+          const btn = document.getElementById(p.id);
+          if (now >= p.fecha.getTime()) {
+            btn.style.display = "inline-block";
+          } else {
+            btn.style.display = "none";
+            if (!proximaFecha || p.fecha.getTime() < proximaFecha) proximaFecha = p.fecha.getTime();
+          }
+        });
+
+        // Mostrar enlace final si ha llegado su fecha
+        const btnFinal = document.getElementById(enlaceFinal.id);
+        if (now >= enlaceFinal.fecha.getTime()) {
+          btnFinal.style.display = "inline-block";
+          btnFinal.setAttribute("href", enlaceFinal.href);
+        } else {
+          btnFinal.style.display = "none";
+          btnFinal.removeAttribute("href");
+          if (!proximaFecha || enlaceFinal.fecha.getTime() < proximaFecha) proximaFecha = enlaceFinal.fecha.getTime();
+        }
+
+        // Mostrar cuenta atrás hacia la próxima pista o final
+        if (proximaFecha) {
+          let t = proximaFecha - now;
+          let days = Math.floor(t / (1000 * 60 * 60 * 24));
+          let hours = Math.floor((t % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          let minutes = Math.floor((t % (1000 * 60 * 60)) / (1000 * 60));
+          let seconds = Math.floor((t % (1000 * 60)) / 1000);
+
+          demo.innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s";
+        } else {
+          demo.innerHTML = "¡Todas las pistas desbloqueadas!";
+        }
+      }
+
+      // Actualiza cada segundo
+      setInterval(actualizarPistas, 1000);
+      actualizarPistas();
+    </script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Misión regalo</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel="stylesheet" type="text/css" href="../css/miEstilo.css">
+
+  <script>
+    function myFunction() {
+      // Get the value of the input field with id="numb"
+      let terminar = document.getElementById("terminar").value;
+      let tren = document.getElementById("tren").value;
+      let traje = document.getElementById("traje").value;
+      let volar = document.getElementById("volar").value;
+      let trepas = document.getElementById("trepas").value;
+      let calma = document.getElementById("calma").value;
+      let flama = document.getElementById("flama").value;
+      let llama = document.getElementById("llama").value;
+      if (terminar != "terminar") {
+        alert("Primera palabra erronea");
+      }
+      if (tren != "tren") {
+        alert("Segunda palabra erronea");
+      }
+      if (traje != "traje") {
+        alert("Tercera palabra erronea");
+      }
+      if (volar != "volar") {
+        alert("Cuarta palabra erronea");
+      }
+      if (trepas != "trepas") {
+        alert("Quinta palabra erronea");
+      }
+      if (calma != "calma") {
+        alert("Sexta palabra erronea");
+      }
+      if (flama != "flama") {
+        alert("Septima palabra erronea");
+      }
+      if (llama != "llama") {
+        alert("Octava palabra erronea");
+      }
+      if (terminar == "terminar" && tren == "tren" && traje == "traje" && volar == "volar" && trepas == "trepas" && calma == "calma" && flama == "flama" && llama == "llama") {
+        alert("Tus sorpresa está en el mueble del café");
+      }
+    }
+  </script>
+
+</head>
+
+<body class="teal">
+  <div class="bg">
+    <nav class="brown lighten-3">
+      <div class="nav-wrapper">
+        <a href="../index.html" class="brand-logo">
+          <i class="material-icons">home</i>
+        </a>
+      </div>
+    </nav>
+
+    <header>
+      <br><br>
+      <h6 class="white-text center-align">Completa la letra de las canciones para encontrar la siguiente sorpresa</h6>
+    </header>
+
+    <br><br>
+
+    <main class="container" id="contenedor">
+      <div class="row">
+        <div class="col s12 m6">
+          <div class="card grey lighten-1">
+            <div class="card-content white-text">
+              <span>Dejarse llevar suena demasiado bien<br>Jugar al azar<br>Nunca saber dónde puedes <input
+                  id="terminar" type="text" class="validate" required><br>O
+                empezar<br>Un instante mientras los turistas se van<br>Un <input id="tren" type="text" class="validate"
+                  required> de madrugada consiguió trazar<br>La
+                frontera
+                entre siempre o jamás</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card grey lighten-1">
+            <div class="card-content white-text">
+              <span>La mujer de verde<br>Se ha vuelto a poner el <input id="traje" type="text" class="validate"
+                  required><br>Para rescatarme<br>¿Qué sucederá cuando las
+                balas no
+                reboten<br>Y los malos sean más fuertes<br>Y <input id="volar" type="text" class="validate" required>
+                no sea
+                tan fácil<br>Y conozcan nuestros
+                planes?</span>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card grey lighten-1">
+            <div class="card-content white-text">
+              <span>Monillo loco,<br>cuando tu <input id="trepas" type="text" class="validate" required> yo me
+                desvoco.<br>A mi
+                me encanta cuando me bailas<br>y te
+                desnudas
+                poquito a poco.<br>El reloj nunca para solo cuando tu me miras<br>y mis pies van descalzos ya no
+                sienten
+                las
+                heridas.<br>Loco amor una droga que a mi me <input id="calma" type="text" class="validate" required>
+                por
+                dentro<br>y tu y yo si tu quieres compañeros
+                diferentes.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col s12 m6">
+          <div class="card grey lighten-1">
+            <div class="card-content white-text">
+              <span>Y si te veo cruje la cama<br>toco y se enciende la <input id="flama" type="text" class="validate"
+                  required><br>Te como el corazón a la llama<br>No
+                tengo hartura, termino y te tengo más ganas<br>Cruje la cama<br>Te toco y se enciende la flama<br>Te
+                como el corazón a la <input id="llama" type="text" class="validate" required><br>No tengo hartura,
+                termino y te
+                tengo más ganas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button class="waves-effect waves-light btn brown lighten-2" type="button"
+        onclick="myFunction()">Comprobar</button>
+    </main>
+  </div>
+</body>
+
+</html>

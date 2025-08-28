@@ -1,0 +1,208 @@
+/* ===== GLOBAL ===== */
+/* No cambiamos nada que afecte a otras páginas */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  background-color: antiquewhite;
+}
+
+.bg {
+  padding-top: 64px;
+  min-height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../media/fondo.jpeg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@keyframes zoomBg {
+  from {
+    background-size: 100%;
+  }
+
+  to {
+    background-size: 110%;
+  }
+}
+
+nav {
+  font-size: 16px;
+  position: fixed;
+  /* hace que se quede fijo */
+  top: 0;
+  /* arriba de la ventana */
+  left: 0;
+  width: 100%;
+  /* que ocupe todo el ancho */
+  z-index: 1000;
+  /* por encima del resto de elementos */
+}
+
+main {
+  /* ajusta según la altura real de tu nav */
+}
+
+
+h2 {
+  font-family: "Lora", serif;
+}
+
+h6 {
+  font-family: "Manrope", sans-serif;
+}
+
+p,
+h2,
+h6 {
+  color: white;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+h2,
+h6 {
+  animation: fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#demo {
+  font-size: 1.8rem;
+  font-family: "Courier New", monospace;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 10px;
+  display: inline-block;
+  margin-top: 15px;
+  letter-spacing: 2px;
+}
+
+.waves-effect {
+  width: 35%;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.waves-effect:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+.info {
+  background: none;
+}
+
+/* ==== TARJETAS DE PREGUNTAS ==== */
+.quiz-card {
+  margin-top: 20px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(121, 85, 72, 0.9);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* ==== BOTONES ==== */
+.btn.answer {
+  margin: 6px 4px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn.answer:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+}
+
+/* ==== CÓDIGO SECRETO ==== */
+.hidden {
+  display: none;
+}
+
+#codeContainer {
+  margin-top: 25px;
+  padding: 20px;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.55);
+  animation: fadeIn 1s ease;
+}
+
+#codeContainer h5 {
+  color: #ffeb3b;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+#secretCode {
+  font-weight: bold;
+  font-size: 1.6rem;
+  color: #ff5722;
+  letter-spacing: 3px;
+}
+
+/* ==== JUEGO DE TARJETAS DE FOTOS ==== */
+/* Todo prefijado con .juego-vacaciones para que no afecte otras páginas */
+.juego-vacaciones .sortable-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+  justify-items: center;
+}
+
+.juego-vacaciones .card {
+  cursor: grab;
+  width: 220px;
+  user-select: none;
+}
+
+.juego-vacaciones .dragging {
+  opacity: 0.5;
+}
+
+.juego-vacaciones .card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  pointer-events: none;
+}
+
+.juego-vacaciones .vacaciones-img {
+  width: 200px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .juego-vacaciones .sortable-container {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  }
+
+  .juego-vacaciones .card {
+    width: 180px;
+  }
+
+  .juego-vacaciones .vacaciones-img {
+    width: 160px;
+    height: 120px;
+  }
+}

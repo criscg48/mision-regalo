@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Misión regalo</title>
+  <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/miEstilo.css">
+  <style>
+    .quiz-card {
+      margin-top: 20px;
+      border-radius: 12px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .code-part {
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+  </style>
+</head>
+
+<body class="teal">
+  <div class="bg">
+    <nav class="brown lighten-3">
+      <div class="nav-wrapper">
+        <a href="../index.html" class="brand-logo">
+          <i class="material-icons">home</i>
+        </a>
+      </div>
+    </nav>
+    <main class="container" id="contenedor">
+      <div class="container center-align">
+        <h2>🎵 Juego: Reconoce la Canción 🎵</h2>
+        <p>Escucha el fragmento y elige la canción correcta para desbloquear el código secreto 🎁</p>
+
+        <!-- Canción 1 -->
+        <div class="card quiz-card teal brown lighten-2 white-text">
+          <div class="card-content">
+            <span class="card-title">Canción 1</span>
+            <audio id="audio1" src="../media/la-raiz.mp3" controls></audio>
+            <br><br>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="S1">Entre poetas y presos</button>
+            <button class="btn answer brown lighten-1" data-correct="false">Nos volveremos a ver</button>
+            <button class="btn answer brown lighten-1" data-correct="false">A la sombra de la sierra</button>
+          </div>
+        </div>
+
+        <!-- Canción 2 -->
+        <div class="card quiz-card teal brown lighten-2 white-text">
+          <div class="card-content">
+            <span class="card-title">Canción 2</span>
+            <audio id="audio2" src="../media/siloe.mp3" controls></audio>
+            <br><br>
+            <button class="btn answer brown lighten-1" data-correct="false">Que Merezca la Pena</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="S2">Si Me Necesitas,
+              Llámame</button>
+            <button class="btn answer brown lighten-1" data-correct="false">Todos los Besos</button>
+          </div>
+        </div>
+
+        <!-- Canción 3 -->
+        <div class="card quiz-card teal brown lighten-2 white-text">
+          <div class="card-content">
+            <span class="card-title">Canción 3</span>
+            <audio id="audio2" src="../media/arde-bogota.mp3" controls></audio>
+            <br><br>
+            <button class="btn answer brown lighten-1" data-correct="false">Cariño</button>
+            <button class="btn answer brown lighten-1" data-correct="false">La salvación</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="S4">Exoplaneta</button>
+          </div>
+        </div>
+
+        <!-- Código secreto -->
+        <div id="codeContainer" class="hidden">
+          <h5>¡Has conseguido todas las respuestas! 🎉</h5>
+          <p class="brown lighten-2 white-text"> El código secreto es: <span id="secretCode" class="code-part"></span>
+          </p>
+        </div>
+
+      </div>
+    </main>
+  </div>
+  <script>
+    let codeParts = [];
+    const answers = document.querySelectorAll('.answer');
+    const codeContainer = document.getElementById("codeContainer");
+    const secretCodeSpan = document.getElementById("secretCode");
+
+    answers.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (btn.dataset.correct === "true") {
+          if (!codeParts.includes(btn.dataset.code)) {
+            codeParts.push(btn.dataset.code);
+            M.toast({ html: "✅ Correcto, pista desbloqueada: " + btn.dataset.code });
+          } else {
+            M.toast({ html: "Ya respondiste esta pregunta" });
+          }
+        } else {
+          M.toast({ html: "❌ Ups, esa no es la respuesta" });
+        }
+
+        // Si tiene las 3 partes, mostrar el código
+        if (codeParts.length === 3) {
+          document.getElementById("secretCode").textContent = codeParts.join("-");
+          codeContainer.classList.remove("hidden");
+        }
+      });
+    });
+  </script>
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
