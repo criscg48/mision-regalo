@@ -54,10 +54,19 @@
       </div>
     </nav>
 
-    <audio autoplay loop hidden>
+    <!-- Música de fondo -->
+    <audio id="bg-music" loop>
       <source src="media/suspense.mp3" type="audio/mpeg">
       Tu navegador no soporta audio en HTML5.
     </audio>
+
+    <!-- Botón de fallback para activar música -->
+    <div class="center-align" style="margin: 20px;">
+      <button id="play-btn" class="waves-effect waves-light btn brown lighten-2">
+        ▶ Reproducir música
+      </button>
+    </div>
+
 
     <header>
       <h2 class="white-text center-align">Misión: Regalo de Cumpleaños</h2>
@@ -88,6 +97,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
     <script>
+      const audio = document.getElementById('bg-music');
+      const playBtn = document.getElementById('play-btn');
+
+      // Intento de autoplay
+      audio.play().then(() => {
+        // Si funciona, oculto el botón
+        playBtn.style.display = 'none';
+      }).catch(() => {
+        // Si no funciona, muestro el botón
+        playBtn.style.display = 'inline-block';
+      });
+
+      // Si el usuario hace clic, reproduce y oculta el botón
+      playBtn.addEventListener('click', () => {
+        audio.play();
+        playBtn.style.display = 'none';
+      });
       // Fechas de desbloqueo de pistas
       const pistas = [
         { id: "pista1", fecha: new Date("Oct 21, 2025 10:00:00") },
