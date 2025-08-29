@@ -15,7 +15,7 @@
 
   <link rel="stylesheet" type="text/css" href="css/miEstilo.css">
   <style>
-  /* Temporizador */
+    /* Temporizador */
     #demo {
       font-size: 1.5rem;
       font-family: "Courier New", monospace;
@@ -41,11 +41,10 @@
       transform: scale(1.05);
       box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
     }
-
   </style>
 </head>
 
-<body class="teal mision-regalo">
+<body class="mision-regalo">
   <div class="bg">
     <nav class="brown lighten-3">
       <div class="nav-wrapper">
@@ -54,6 +53,11 @@
         </a>
       </div>
     </nav>
+
+    <audio autoplay loop hidden>
+      <source src="media/suspense.mp3" type="audio/mpeg">
+      Tu navegador no soporta audio en HTML5.
+    </audio>
 
     <header>
       <h2 class="white-text center-align">Misión: Regalo de Cumpleaños</h2>
@@ -64,11 +68,15 @@
       <div class="row">
         <div class="center-align">
           <!-- Pistas -->
-          <a id="pista1" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista4.html" style="display:none;">Pista 1</a><br><br>
-          <a id="pista2" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista5.html" style="display:none;">Pista 2</a><br><br>
-          <a id="pista3" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista6.html" style="display:none;">Pista 3</a><br><br>
+          <a id="pista1" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista4.html"
+            style="display:none;">Pista 1</a><br><br>
+          <a id="pista2" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista5.html"
+            style="display:none;">Pista 2</a><br><br>
+          <a id="pista3" class="waves-effect waves-light btn brown lighten-2 pistas-btn" href="pistas/pista6.html"
+            style="display:none;">Pista 3</a><br><br>
           <!-- Botón final -->
-          <a id="miEnlace" class="waves-effect waves-light btn brown lighten-2 pistas-btn" style="display:none;">Comprobar código</a>
+          <a id="miEnlace" class="waves-effect waves-light btn brown lighten-2 pistas-btn"
+            style="display:none;">Comprobar código</a>
 
           <p class="white-text bold">Tiempo restante hasta la siguiente pista o hasta comprobar el código final:</p>
           <p id="demo" class="flow-text"></p>
