@@ -4,19 +4,66 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Misión regalo</title>
-  <!-- Compiled and minified CSS -->
+  <title>Comprobar Código</title>
+  <!-- Materialize CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <!-- Compiled and minified JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
   <link rel="stylesheet" type="text/css" href="../css/miEstilo.css">
+  <style>
+    body.codigo-page {
+      background: url('../media/fondo.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+    }
+
+    /* Inputs estilo caja */
+    input.codigo-input {
+      width: 80px;
+      height: 60px;
+      font-size: 2rem;
+      text-align: center;
+      color: white;
+      border: 2px solid rgba(255, 255, 255, 0.8) !important;
+      border-radius: 10px;
+      background-color: rgba(0, 0, 0, 0.4);
+      margin: 0 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      -webkit-appearance: none;
+    }
+
+    input.codigo-input:focus {
+      outline: none !important;
+      border-color: yellow !important;
+      background-color: rgba(0, 0, 0, 0.6);
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(255, 255, 0, 0.4);
+    }
+
+    @media (max-width: 600px) {
+      input.codigo-input {
+        width: 60px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+    }
+
+    button:active {
+      transform: scale(0.97);
+      transition: transform 0.1s;
+    }
+
+    #codeContainer {
+      margin-top: 30px;
+      display: none;
+    }
+
+    .code-part {
+      font-weight: bold;
+    }
+  </style>
 </head>
 
-<body class="teal">
+<body class="codigo-page">
   <div class="bg">
     <nav class="brown lighten-3">
       <div class="nav-wrapper">
@@ -26,37 +73,51 @@
       </div>
     </nav>
 
-    <header>
-      <br><br>
-      <h6 class="white-text center-align">Ya casi lo tienes<br> Vuela, estrella, vuela</h6>
-    </header>
+    <main class="container center-align">
+      <h2>📌 Introduce el código de 3 números</h2>
+      <p>Vuela, estrella, vuela ✨</p>
 
-    <br><br>
+      <div class="row center-align" style="margin-top: 30px;">
+        <input id="uno" type="number" class="codigo-input" required>
+        <input id="dos" type="number" class="codigo-input" required>
+        <input id="tres" type="number" class="codigo-input" required>
+      </div>
 
-    <main class="container" id="contenedor">
-      <div class="row">
-        <div class="center-align">
-          <input id="uno" type="number" class="validate center-align white-text" required>
-          <input id="dos" type="number" class="validate center-align white-text" required>
-          <input id="tres" type="number" class="validate center-align white-text" required>
-          <button class="waves-effect waves-light btn brown lighten-2" type="button"
-              onclick="comprobar()">Comprobar</button>
-        </div>
+      <button id="comprobarBtn" class="btn brown lighten-2 waves-effect waves-light" type="button">
+        Comprobar
+      </button>
+
+      <!-- Código secreto estilo hidden -->
+      <div id="codeContainer">
+        <h5>🎉 ¡Código correcto!</h5>
+        <p class="brown lighten-2 white-text">El código secreto es: <span id="secretCode" class="code-part">Tu regalo esta en..</span></p>
+      </div>
     </main>
   </div>
-  <script>
-    function comprobar() {
-      let uno = document.getElementById("uno").value;
-      let dos = document.getElementById("dos").value;
-      let tres = document.getElementById("tres").value;
 
-      if(uno==8 && dos==3 && tres==1){
-        alert("Prepara las maletas que mañana nos vamos :)")
-      }else{
-        alert("Vaya, ese no es el código")
-        document.location.reload(true)
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    const unoInput = document.getElementById("uno");
+    const dosInput = document.getElementById("dos");
+    const tresInput = document.getElementById("tres");
+    const comprobarBtn = document.getElementById("comprobarBtn");
+    const codeContainer = document.getElementById("codeContainer");
+
+    comprobarBtn.addEventListener("click", () => {
+      const uno = unoInput.value;
+      const dos = dosInput.value;
+      const tres = tresInput.value;
+
+      // Código correcto: 472, 815, 236
+      if (uno == 472 && dos == 815 && tres == 236) {
+        M.toast({ html: "✅ ¡Código correcto!" });
+        codeContainer.style.display = "block";
+      } else {
+        M.toast({ html: "❌ Código incorrecto" });
+        codeContainer.style.display = "none";
       }
-    }
+    });
   </script>
 </body>
 

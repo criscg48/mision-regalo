@@ -49,7 +49,7 @@
             <span class="card-title">Canción 1</span>
             <audio id="audio1" src="../media/la-raiz.mp3" controls></audio>
             <br><br>
-            <button class="btn answer brown lighten-1" data-correct="true" data-code="S1">Entre poetas y presos</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="8">Entre poetas y presos</button>
             <button class="btn answer brown lighten-1" data-correct="false">Nos volveremos a ver</button>
             <button class="btn answer brown lighten-1" data-correct="false">A la sombra de la sierra</button>
           </div>
@@ -62,7 +62,7 @@
             <audio id="audio2" src="../media/siloe.mp3" controls></audio>
             <br><br>
             <button class="btn answer brown lighten-1" data-correct="false">Que Merezca la Pena</button>
-            <button class="btn answer brown lighten-1" data-correct="true" data-code="S2">Si Me Necesitas,
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="1">Si Me Necesitas,
               Llámame</button>
             <button class="btn answer brown lighten-1" data-correct="false">Todos los Besos</button>
           </div>
@@ -76,7 +76,7 @@
             <br><br>
             <button class="btn answer brown lighten-1" data-correct="false">Cariño</button>
             <button class="btn answer brown lighten-1" data-correct="false">La salvación</button>
-            <button class="btn answer brown lighten-1" data-correct="true" data-code="S4">Exoplaneta</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="5">Exoplaneta</button>
           </div>
         </div>
 
@@ -111,7 +111,7 @@
 
         // Si tiene las 3 partes, mostrar el código
         if (codeParts.length === 3) {
-          document.getElementById("secretCode").textContent = codeParts.join("-");
+          document.getElementById("secretCode").textContent = codeParts.join("");
           codeContainer.classList.remove("hidden");
         }
       });

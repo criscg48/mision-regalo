@@ -38,7 +38,7 @@
             <span class="card-title">Pregunta 1</span>
             <p>¿Cuál es mi serie favorita?</p>
             <br>
-            <button class="btn answer brown lighten-1" data-correct="true" data-code="A1">Prison Break</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="4">Prison Break</button>
             <button class="btn answer brown lighten-1" data-correct="false">La Casa de Papel</button>
             <button class="btn answer brown lighten-1" data-correct="false">Juego de tronos</button>
           </div>
@@ -51,7 +51,7 @@
             <p>¿Dónde hicimos el último viaje juntas?</p>
             <br>
             <button class="btn answer brown lighten-1" data-correct="false">Madrid</button>
-            <button class="btn answer brown lighten-1" data-correct="true" data-code="B7">Budapest</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="7">Budapest</button>
             <button class="btn answer brown lighten-1" data-correct="false">Lisboa</button>
           </div>
         </div>
@@ -63,7 +63,7 @@
             <p>¿Cuál es mi comida favorita?</p>
             <br>
             <button class="btn answer brown lighten-1" data-correct="false">Hamburguesa</button>
-            <button class="btn answer brown lighten-1" data-correct="true" data-code="C9">Tortilla de patatas</button>
+            <button class="btn answer brown lighten-1" data-correct="true" data-code="2">Tortilla de patatas</button>
             <button class="btn answer brown lighten-1" data-correct="false">Sushi</button>
           </div>
         </div>
@@ -97,7 +97,7 @@
 
         // Si tiene las 3 partes, mostrar el código
         if (codeParts.length === 3) {
-          document.getElementById("secretCode").textContent = codeParts.join("-");
+          document.getElementById("secretCode").textContent = codeParts.join("");
           codeContainer.classList.remove("hidden");
         }
       });
