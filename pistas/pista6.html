@@ -14,16 +14,34 @@
     /* Contenedor de tarjetas */
     .sortable-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 15px;
       margin-top: 20px;
-      justify-items: center;
+      justify-items: stretch;
     }
 
-    .card {
+    .sortable .card {
       cursor: grab;
-      width: 220px;
+      width: 100%;
+      max-width: 220px;
+      min-width: 0;
+      margin: 0;
       user-select: none;
+      -webkit-user-select: none;
+      -webkit-user-drag: none;
+      touch-action: none;
+      transition: transform 160ms ease, opacity 160ms ease, box-shadow 160ms ease;
+    }
+
+    .sortable .card:active {
+      cursor: grabbing;
+    }
+
+    .sortable .card.dragging {
+      opacity: 0.55;
+      transform: scale(1.04);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+      z-index: 2;
     }
 
     .card.selected {
@@ -40,10 +58,12 @@
     }
 
     .vacaciones-img {
-      width: 200px;
+      display: block;
+      width: 100%;
       height: 150px;
-      object-fit: cover;
+      object-fit: contain;
       border-radius: 12px;
+      background: rgba(0, 0, 0, 0.16);
     }
 
     .hidden {
@@ -52,16 +72,16 @@
 
     @media (max-width: 768px) {
       .sortable-container {
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
       }
 
-      .card {
-        width: 180px;
+      .sortable .card {
+        width: 100%;
       }
 
       .vacaciones-img {
-        width: 160px;
-        height: 120px;
+        height: clamp(90px, 28vw, 140px);
       }
     }
 
@@ -87,7 +107,7 @@
 
     <main class="container center-align">
       <h2>📸 Juego: Ordena tus Vacaciones</h2>
-      <p>Toca dos imágenes para intercambiarlas y ponerlas en orden cronológico 🏖️</p>
+      <p>Arrastra las fotos para ordenarlas, o toca dos para intercambiarlas 🏖️</p>
 
       <!-- Contenedor de tarjetas DESORDENADAS -->
       <div class="sortable sortable-container">
@@ -149,24 +169,85 @@
     const codeContainer = document.getElementById("codeContainer");
 
     let firstSelected = null;
+    let draggedCard = null;
+    let startX = 0;
+    let startY = 0;
+    let didDrag = false;
+    let suppressClick = false;
 
-    // Intercambio por clic
-    sortable.addEventListener("click", e => {
-      const card = e.target.closest(".card");
-      if (!card) return;
+    function swapContents(firstCard, secondCard) {
+      const firstContent = firstCard.querySelector(".card-content");
+      const secondContent = secondCard.querySelector(".card-content");
+      const tempHTML = firstContent.innerHTML;
+      firstContent.innerHTML = secondContent.innerHTML;
+      secondContent.innerHTML = tempHTML;
+    }
+
+    sortable.addEventListener("pointerdown", event => {
+      const card = event.target.closest(".card");
+      if (!card || event.button !== 0) return;
+
+      draggedCard = card;
+      startX = event.clientX;
+      startY = event.clientY;
+      didDrag = false;
+      card.setPointerCapture(event.pointerId);
+    });
+
+    sortable.addEventListener("pointermove", event => {
+      if (!draggedCard) return;
+
+      if (!didDrag && Math.hypot(event.clientX - startX, event.clientY - startY) > 8) {
+        didDrag = true;
+        draggedCard.classList.add("dragging");
+        if (firstSelected) {
+          firstSelected.classList.remove("selected");
+          firstSelected = null;
+        }
+      }
+      if (!didDrag) return;
+
+      const targetCard = document.elementFromPoint(event.clientX, event.clientY)?.closest(".card");
+      if (targetCard && targetCard !== draggedCard && targetCard.parentElement === sortable) {
+        const cards = [...sortable.querySelectorAll(".card")];
+        const fromIndex = cards.indexOf(draggedCard);
+        const toIndex = cards.indexOf(targetCard);
+        if (fromIndex < toIndex) sortable.insertBefore(draggedCard, targetCard.nextSibling);
+        else sortable.insertBefore(draggedCard, targetCard);
+      }
+    });
+
+    function finishPointer(event) {
+      if (!draggedCard) return;
+      const card = draggedCard;
+      const wasDrag = didDrag;
+      card.classList.remove("dragging");
+      draggedCard = null;
+      didDrag = false;
+
+      if (wasDrag) {
+        suppressClick = true;
+        window.setTimeout(() => { suppressClick = false; }, 0);
+      }
+      if (card.hasPointerCapture(event.pointerId)) card.releasePointerCapture(event.pointerId);
+    }
+
+    sortable.addEventListener("pointerup", finishPointer);
+    sortable.addEventListener("pointercancel", finishPointer);
+
+    // Alternativa accesible: tocar dos tarjetas las intercambia.
+    sortable.addEventListener("click", event => {
+      const card = event.target.closest(".card");
+      if (!card || suppressClick) return;
 
       if (!firstSelected) {
         firstSelected = card;
         card.classList.add("selected");
+      } else if (firstSelected === card) {
+        card.classList.remove("selected");
+        firstSelected = null;
       } else {
-        // Intercambiar solo el contenido de cada tarjeta (imagen + título)
-        const firstContent = firstSelected.querySelector(".card-content");
-        const secondContent = card.querySelector(".card-content");
-
-        const tempHTML = firstContent.innerHTML;
-        firstContent.innerHTML = secondContent.innerHTML;
-        secondContent.innerHTML = tempHTML;
-
+        swapContents(firstSelected, card);
         firstSelected.classList.remove("selected");
         firstSelected = null;
       }
