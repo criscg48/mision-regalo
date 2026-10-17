@@ -20,9 +20,9 @@
     .case-grid > section { min-width: 0; }
     .section-title { margin: 0 0 12px; padding-bottom: 6px; border-bottom: 2px solid rgba(255,255,255,.65); color: white; font-size: 1.45rem; text-shadow: 1px 1px 4px rgba(0,0,0,.6); }
     .suspect-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .suspect-card { display: grid; grid-template-columns: 58px 1fr; gap: 9px; align-items: center; min-height: 105px; padding: 9px; border: 0; border-radius: 12px; background: #a1887f; color: white; box-shadow: 0 2px 5px rgba(0,0,0,.25); }
-    .portrait { display: block; width: 58px; height: 70px; border: 2px solid #594938; background: #d6c39d; }
-    .suspect-card h3 { margin: 0 0 4px; color: white; font-size: 1.08rem; font-weight: bold; }
+    .suspect-card { display: flex; flex-direction: column; gap: 5px; align-items: center; min-height: 170px; padding: 12px; border: 0; border-radius: 12px; background: #a1887f; color: white; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,.25); }
+    .portrait { display: block; flex: 0 0 auto; width: 76px; height: 88px; border: 2px solid #594938; border-radius: 6px; background: #d6c39d; }
+    .suspect-card h3 { margin: 2px 0 0; color: white; font-size: 1.08rem; font-weight: bold; }
     .suspect-card p { margin: 0; font-size: .84rem; line-height: 1.3; }
     .victim-card { grid-column: 1 / -1; display: flex; gap: 12px; align-items: center; padding: 10px 12px; border-radius: 12px; background: #8d6e63; color: white; }
     .victim-card .portrait { width: 48px; height: 54px; }
@@ -54,15 +54,14 @@
     @media (max-width: 760px) {
       .case-sheet { padding: 16px; }
       .case-grid { grid-template-columns: 1fr; }
-      .suspect-card { grid-template-columns: 48px 1fr; }
-      .portrait { width: 48px; height: 60px; }
+      .portrait { width: 68px; height: 78px; }
     }
     @media (max-width: 420px) {
       .case-page { padding-inline: 10px; }
       .case-sheet { padding: 12px; }
       .suspect-list { gap: 6px; }
-      .suspect-card { grid-template-columns: 38px 1fr; gap: 6px; padding: 6px; }
-      .portrait { width: 38px; height: 52px; }
+      .suspect-card { gap: 5px; padding: 8px 6px; }
+      .portrait { width: 58px; height: 68px; }
       .suspect-card h3 { font-size: .96rem; }
       .suspect-card p { font-size: .76rem; }
       .guess-form { flex-wrap: wrap; }
@@ -76,8 +75,8 @@
     <main class="container case-page">
       <header class="case-heading">
         <p class="eyebrow">Expediente 04 · Investigación abierta</p>
-        <h1>Hamburguesas de muerte</h1>
-        <p>Algo más que la carne de la hamburguesa acabó hecho picadillo. Averigua quién estuvo a solas con la víctima.</p>
+        <h1>L'epoque de muerte</h1>
+        <p>Algo más que la carne de la hamburguesa acabó hecho picadillo. Averigua quién estuvo a solas con Víctor.</p>
       </header>
 
       <section class="case-sheet" aria-label="Expediente del caso">
@@ -86,35 +85,35 @@
             <h2 class="section-title">Sospechosos</h2>
             <div class="suspect-list">
               <article class="suspect-card">
-                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Luna"><rect width="58" height="70" fill="#c4a987"/><path d="M5 70c2-17 12-24 24-24s22 7 24 24" fill="#4d5b56"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#e9c9a2"/><path d="M12 30C10 9 43 4 47 26l-5-5c-9 5-17 6-28 5z" fill="#392d29"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 4 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
-                <div><h3>Luna</h3><p>Estaba en la esquina noroeste.</p></div>
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Alex, hombre con pelo corto gris"><rect width="58" height="70" fill="#c4a987"/><path d="M5 70c2-17 12-24 24-24s22 7 24 24" fill="#4d5b56"/><ellipse cx="29" cy="31" rx="16" ry="19" fill="#e9c9a2"/><path d="M12 27C12 9 21 5 30 7c10-2 16 7 16 20l-7-8-4-7-5 8-12 0z" fill="#9b9a96" stroke="#777773" stroke-width="1"/><circle cx="23" cy="32" r="1.5" fill="#302820"/><circle cx="35" cy="32" r="1.5" fill="#302820"/><path d="M24 41q5 3 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Alex</h3><p>Estaba en la esquina noroeste.</p></div>
               </article>
               <article class="suspect-card">
-                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Marcos"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#59616a"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#d9ad87"/><path d="M12 26C14 7 43 9 46 27l-8-7-22 4z" fill="#352a25"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 3 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
-                <div><h3>Marcos</h3><p>Estaba en la fila de la víctima, dos columnas a su derecha.</p></div>
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Damaris"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#59616a"/><path d="M10 31C8 10 18 3 29 3s22 8 20 28l-4 33-10 2 2-37H20l2 37-10-2z" fill="#6d4639"/><ellipse cx="29" cy="30" rx="14" ry="18" fill="#d9ad87"/><path d="M14 26C15 8 42 8 44 27l-7-8-19 4z" fill="#6d4639"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 3 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Damaris</h3><p>Estaba en la fila de Víctor, dos columnas a su derecha.</p></div>
               </article>
               <article class="suspect-card">
-                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Nora"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#795c67"/><ellipse cx="29" cy="30" rx="15" ry="18" fill="#e6c3a0"/><path d="M12 34C7 5 49 5 46 36l-7-13-22 0z" fill="#533b31"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 4 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
-                <div><h3>Nora</h3><p>Estaba en la última columna, en otra fila que Marcos.</p></div>
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Brigi, mujer con pelo largo rubio"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#795c67"/><path d="M10 31C8 10 18 3 29 3s22 8 20 28l-4 33-10 2 2-37H20l2 37-10-2z" fill="#d9ad52"/><ellipse cx="29" cy="30" rx="14" ry="18" fill="#e6c3a0"/><path d="M14 26C15 8 42 8 44 27l-7-8-19 4z" fill="#d9ad52"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 3 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Brigi</h3><p>Estaba en la última columna, en otra fila que Damaris.</p></div>
               </article>
               <article class="suspect-card">
-                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Pablo"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#59664f"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#bd8966"/><path d="M12 25C14 7 44 7 46 27l-8-8-18 1z" fill="#282725"/><path d="M17 35q12 18 24 0l-3 14H20z" fill="#49342d"/><circle cx="23" cy="30" r="1.5" fill="#302820"/><circle cx="35" cy="30" r="1.5" fill="#302820"/></svg>
-                <div><h3>Pablo</h3><p>Estaba en la última fila.</p></div>
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Esther, mujer con pelo corto moreno"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#59664f"/><ellipse cx="29" cy="30" rx="14" ry="18" fill="#bd8966"/><path d="M14 27C14 8 42 7 44 27l-7-7-20 3z" fill="#493629"/><path d="M15 24 13 39l5-3m25-12 2 15-5-3" fill="#493629"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 4 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Esther</h3><p>Estaba en la última fila.</p></div>
               </article>
               <article class="suspect-card">
-                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Inés"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#75654e"/><ellipse cx="29" cy="30" rx="15" ry="18" fill="#e4bd98"/><path d="M12 32C7 9 47 4 46 31l-7-11-19 2z" fill="#6c4939"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 4 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
-                <div><h3>Inés</h3><p>Estaba justo debajo de Pablo, una columna a su derecha.</p></div>
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Carol, mujer con pelo largo castaño"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#75654e"/><path d="M10 31C8 10 18 3 29 3s22 8 20 28l-4 33-10 2 2-37H20l2 37-10-2z" fill="#65412f"/><ellipse cx="29" cy="30" rx="14" ry="18" fill="#e4bd98"/><path d="M14 26C15 8 42 8 44 27l-7-8-19 4z" fill="#65412f"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 3 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Carol</h3><p>Estaba justo debajo de Esther, una columna a su derecha.</p></div>
               </article>
               <article class="suspect-card">
-                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Diego"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#526168"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#c8936e"/><path d="M12 26C12 8 45 7 46 27l-8-8-18 1z" fill="#332c29"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M23 39q6 3 12 0" fill="none" stroke="#75483d" stroke-width="2"/></svg>
-                <div><h3>Diego</h3><p>Estaba en la última fila, quinta columna.</p></div>
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Francis"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#526168"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#c8936e"/><path d="M12 26C12 8 45 7 46 27l-8-8-18 1z" fill="#332c29"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M23 39q6 3 12 0" fill="none" stroke="#75483d" stroke-width="2"/></svg>
+                <div><h3>Francis</h3><p>Estaba en la última fila, quinta columna.</p></div>
               </article>
               <article class="victim-card">
-                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato de la víctima"><rect width="58" height="70" fill="#b4a48b"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#6d5147"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#d7b491"/><path d="M12 26C14 7 44 7 46 27l-8-8-18 1z" fill="#51453b"/><path d="M17 32h9m6 0h9m-15 0h6" stroke="#382c22" stroke-width="2"/><path d="M24 40q5 2 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
-                <div><strong>La víctima</strong><p>Su posición está marcada en rojo en el plano. Estaba a solas con el asesino.</p></div>
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato de Víctor"><rect width="58" height="70" fill="#b4a48b"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#6d5147"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#d7b491"/><path d="M12 26C14 7 44 7 46 27l-8-8-18 1z" fill="#51453b"/><path d="M17 32h9m6 0h9m-15 0h6" stroke="#382c22" stroke-width="2"/><path d="M24 40q5 2 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><strong>Víctor</strong><p>Su posición está marcada en rojo en el plano. Estaba a solas con el asesino.</p></div>
               </article>
             </div>
-            <p class="rule-note"><strong>Reglas del plano:</strong> cada sospechoso ocupa una casilla distinta. No se repite fila ni columna. Las casillas ocupadas por muebles están bloqueadas. La sala está dividida en cuatro zonas; el asesino es quien comparte zona con la víctima y está a solas con ella.</p>
+            <p class="rule-note"><strong>Reglas del plano:</strong> cada sospechoso ocupa una casilla distinta. No se repite fila ni columna. Las casillas ocupadas por muebles están bloqueadas. La sala está dividida en cuatro zonas; el asesino es quien comparte zona con Víctor y está a solas con él.</p>
           </section>
 
           <section>
@@ -123,7 +122,7 @@
             <div class="map-frame">
               <svg class="map-image" viewBox="0 0 620 560" role="img" aria-labelledby="map-title map-desc">
                 <title id="map-title">Plano cuadriculado de la hamburguesería</title>
-                <desc id="map-desc">Cuadrícula de seis filas y seis columnas, dividida en cocina, almacén, recepción y comedor. Las casillas grises con el símbolo de prohibido contienen muebles. La víctima está en la segunda fila y segunda columna.</desc>
+                <desc id="map-desc">Cuadrícula de seis filas y seis columnas, dividida en cocina, almacén, recepción y comedor. Las casillas grises con el símbolo de prohibido contienen muebles. Víctor está en la segunda fila y segunda columna.</desc>
                 <rect x="0" y="0" width="620" height="560" fill="#d2c29d"/>
                 <text x="310" y="27" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" letter-spacing="3" fill="#41372b">PLANO DEL LOCAL · 6 × 6</text>
                 <g font-family="Arial" font-size="11" font-weight="bold" fill="#554a3a">
@@ -168,18 +167,7 @@
                 <g font-family="Arial" font-size="8" font-weight="bold" fill="#6c2d23"><text x="193" y="219" text-anchor="middle">VÍCTIMA</text></g>
               </svg>
             </div>
-            <p class="map-key">X = casilla bloqueada por un mueble. No se puede colocar a ningún acusado ahí. La víctima está en la fila 2, columna 2.</p>
-            <div class="clue-box">
-              <h3>Notas de la investigación</h3>
-              <ul>
-                <li>Luna estaba en la esquina noroeste del plano.</li>
-                <li>Marcos estaba en la fila 2, dos columnas a la derecha de la víctima.</li>
-                <li>Nora estaba en la última casilla de la fila 3.</li>
-                <li>Pablo estaba en la fila 4, columna 2.</li>
-                <li>Inés estaba justo debajo de Pablo y una columna a su derecha.</li>
-                <li>Diego estaba en la última fila, columna 5.</li>
-              </ul>
-            </div>
+            <p class="map-key">X = casilla bloqueada por un mueble. No se puede colocar a ningún acusado ahí. Víctor está en la fila 2, columna 2.</p>
           </section>
         </div>
 
@@ -192,7 +180,7 @@
           </form>
           <p id="guessMessage" role="status" aria-live="polite"></p>
           <div id="codeContainer" class="hidden" role="status" aria-live="polite">
-            <h3>¡Caso resuelto! La asesina es Luna.</h3>
+            <h3>¡Caso resuelto! El asesino es Alex.</h3>
             <p>El código secreto es: <span class="code-part">5</span></p>
           </div>
         </section>
@@ -209,7 +197,7 @@
     guessForm.addEventListener("submit", event => {
       event.preventDefault();
       const guess = guessInput.value.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
-      if (guess === "luna") {
+      if (guess === "alex") {
         guessMessage.textContent = "";
         codeContainer.classList.remove("hidden");
       } else {
