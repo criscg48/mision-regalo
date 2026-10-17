@@ -78,10 +78,10 @@
       <p>Oh, oh, oh ✨</p>
 
       <div class="row center-align" style="margin-top: 30px;">
-        <input id="uno" type="number" class="codigo-input" required>
-        <input id="dos" type="number" class="codigo-input" required>
-        <input id="tres" type="number" class="codigo-input" required>
-        <input id="cuatro" type="number" class="codigo-input" required>
+        <input id="uno" type="text" class="codigo-input" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" enterkeyhint="next" aria-label="Primera cifra" required>
+        <input id="dos" type="text" class="codigo-input" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" enterkeyhint="next" aria-label="Segunda cifra" required>
+        <input id="tres" type="text" class="codigo-input" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" enterkeyhint="next" aria-label="Tercera cifra" required>
+        <input id="cuatro" type="text" class="codigo-input" inputmode="numeric" pattern="[0-9]*" maxlength="1" autocomplete="off" enterkeyhint="done" aria-label="Cuarta cifra" required>
       </div>
 
       <button id="comprobarBtn" class="btn brown lighten-2 waves-effect waves-light" type="button">
@@ -105,6 +105,21 @@
     const cuatroInput = document.getElementById("cuatro");
     const comprobarBtn = document.getElementById("comprobarBtn");
     const codeContainer = document.getElementById("codeContainer");
+    const codeInputs = [unoInput, dosInput, tresInput, cuatroInput];
+
+    // En iPhone, inputmode=numeric abre el teclado numérico sin controles de incremento.
+    codeInputs.forEach((input, index) => {
+      input.addEventListener("input", () => {
+        input.value = input.value.replace(/\D/g, "").slice(0, 1);
+        if (input.value && codeInputs[index + 1]) codeInputs[index + 1].focus();
+      });
+
+      input.addEventListener("keydown", event => {
+        if (event.key === "Backspace" && !input.value && codeInputs[index - 1]) {
+          codeInputs[index - 1].focus();
+        }
+      });
+    });
 
     comprobarBtn.addEventListener("click", () => {
       const uno = unoInput.value;
@@ -112,7 +127,7 @@
       const tres = tresInput.value;
       const cuatro = cuatroInput.value;
       // Código correcto: 4, 8, 2, 5
-      if (uno == 4 && dos == 8 && tres == 2 && cuatro == 5) {
+      if (uno === "4" && dos === "8" && tres === "2" && cuatro === "5") {
         M.toast({ html: "✅ ¡Código correcto!" });
         codeContainer.style.display = "block";
       } else {
