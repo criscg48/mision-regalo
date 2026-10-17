@@ -15,7 +15,7 @@ body {
 .bg {
   display: flow-root;
   box-sizing: border-box;
-  padding-top: 64px;
+  padding-top: calc(64px + env(safe-area-inset-top, 0px));
   min-height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../media/fondo.jpeg");
   background-position: center;
@@ -34,17 +34,62 @@ body {
 }
 
 nav {
-  font-size: 16px;
   position: fixed;
-  /* hace que se quede fijo */
-  top: 0;
-  /* arriba de la ventana */
-  left: 0;
-  width: 100%;
-  /* que ocupe todo el ancho */
+  inset: 0 0 auto;
   z-index: 1000;
-  /* por encima del resto de elementos */
+  box-sizing: border-box;
+  width: 100%;
+  height: calc(64px + env(safe-area-inset-top, 0px));
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) 0 env(safe-area-inset-left, 0px);
+  font-size: 16px;
 }
+
+nav .nav-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  line-height: normal;
+}
+
+nav .brand-logo {
+  position: relative !important;
+  left: auto !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-left: clamp(8px, 2vw, 20px);
+  transform: none !important;
+  border-radius: 12px;
+  line-height: 1;
+  -webkit-tap-highlight-color: transparent;
+}
+
+nav .brand-logo i.material-icons {
+  display: block;
+  height: auto;
+  margin: 0;
+  font-size: 28px;
+  line-height: 1;
+}
+
+nav .brand-logo:focus-visible {
+  outline: 3px solid #4e342e;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  nav {
+    height: calc(56px + env(safe-area-inset-top, 0px));
+  }
+
+  .bg {
+    padding-top: calc(56px + env(safe-area-inset-top, 0px));
+  }
+}
+
 
 main {
   /* ajusta según la altura real de tu nav */
