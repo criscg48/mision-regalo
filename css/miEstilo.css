@@ -1,14 +1,20 @@
 /* ===== GLOBAL ===== */
 /* No cambiamos nada que afecte a otras páginas */
-html,
+html {
+  min-height: 100%;
+}
+
 body {
-  height: 100%;
+  min-height: 100vh;
+  height: auto;
   margin: 0;
   font-family: "Manrope", sans-serif;
   background-color: rgb(185, 171, 165); 
 }
 
 .bg {
+  display: flow-root;
+  box-sizing: border-box;
   padding-top: 64px;
   min-height: 100vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("../media/fondo.jpeg");
