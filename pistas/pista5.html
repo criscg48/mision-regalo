@@ -83,7 +83,7 @@
         <!-- Código secreto -->
         <div id="codeContainer" class="hidden">
           <h5>¡Has conseguido todas las respuestas! 🎉</h5>
-          <p class="brown lighten-2 white-text">El código secreto es: <span id="secretCode" class="code-part">8</span>
+          <p class="brown lighten-2 white-text">El código secreto es: <span id="secretCode" class="code-part">4</span>
           </p>
           </p>
         </div>
@@ -102,7 +102,7 @@
         if (btn.dataset.correct === "true") {
           if (!codeParts.includes(btn.dataset.code)) {
             codeParts.push(btn.dataset.code);
-            M.toast({ html: "✅ Correcto, pista desbloqueada: " + btn.dataset.code });
+            M.toast({ html: "✅ Correcto"});
           } else {
             M.toast({ html: "Ya respondiste esta pregunta" });
           }
@@ -112,7 +112,7 @@
 
         // Si tiene las 3 partes, mostrar el código
         if (codeParts.length === 3) {
-          document.getElementById("secretCode").textContent = codeParts.join("");
+          document.getElementById("secretCode").textContent = "8";
           codeContainer.classList.remove("hidden");
         }
       });
