@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pista 7 · Hamburguesas de muerte</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="../css/miEstilo.css">
+  <style>
+    body.mision-regalo { min-height: 100vh; background: #33291f; font-family: Georgia, 'Times New Roman', serif; }
+    .case-page { max-width: 1120px; padding: 28px 18px 50px; }
+    .case-heading { max-width: 760px; margin: 8px auto 24px; text-align: center; color: #f2e8cf; }
+    .case-heading .eyebrow { margin: 0 0 6px; color: #d8b978; font: 700 .8rem Arial, sans-serif; letter-spacing: .2em; text-transform: uppercase; }
+    .case-heading h1 { margin: 0; font-size: clamp(2rem, 5vw, 3.35rem); }
+    .case-heading p { margin: 8px auto 0; color: #f2e8cf; text-shadow: none; font-size: 1.1rem; }
+    .case-sheet { padding: 24px; background: #eee4c9; border: 1px solid #bda978; box-shadow: 0 12px 40px #140f0b99; }
+    .case-sheet p { color: #33291f; text-shadow: none; }
+    .case-grid { display: grid; grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr); gap: 26px; align-items: start; }
+    .case-grid > section { min-width: 0; }
+    .section-title { margin: 0 0 12px; padding-bottom: 6px; border-bottom: 2px solid #554637; color: #382c22; font-size: 1.45rem; }
+    .suspect-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .suspect-card { display: grid; grid-template-columns: 58px 1fr; gap: 9px; align-items: center; min-height: 105px; padding: 9px; border: 1px solid #a9936b; background: #f7f0df; }
+    .portrait { display: block; width: 58px; height: 70px; border: 2px solid #594938; background: #d6c39d; }
+    .suspect-card h3 { margin: 0 0 4px; color: #382c22; font-size: 1.08rem; font-weight: bold; }
+    .suspect-card p { margin: 0; font-size: .84rem; line-height: 1.3; }
+    .victim-card { grid-column: 1 / -1; display: flex; gap: 12px; align-items: center; padding: 10px 12px; background: #e4d8bc; border-left: 5px solid #9c4938; }
+    .victim-card .portrait { width: 48px; height: 54px; }
+    .victim-card p { margin: 3px 0 0; font-size: .9rem; }
+    .rule-note { margin: 14px 0 0; padding: 10px 12px; background: #ddd0b2; font-size: .9rem; line-height: 1.5; }
+    .map-intro { margin: -4px 0 10px; font-size: .9rem; }
+    .map-frame { width: 100%; box-sizing: border-box; overflow: visible; padding: 8px; background: #544b40; border: 3px solid #342c24; }
+    .map-image { display: block; width: min(100%, 620px); height: auto; margin: 0 auto; }
+    .map-key { margin: 7px 0 0; color: #4b4033; font-size: .78rem; text-align: center; }
+    .clue-box { margin-top: 16px; padding: 13px 15px; background: #f7f0df; border: 1px solid #b7a37c; }
+    .clue-box h3 { margin: 0 0 6px; color: #382c22; font-size: 1.12rem; }
+    .clue-box ul { margin: 0 0 0 18px; padding: 0; }
+    .clue-box li { margin: 5px 0; color: #33291f; line-height: 1.4; }
+    .answer-area { max-width: 620px; margin: 22px auto 0; padding-top: 15px; border-top: 2px solid #554637; text-align: center; }
+    .answer-area h2 { margin: 0 0 5px; color: #382c22; font-size: 1.45rem; }
+    .answer-area > p { margin: 0 0 12px; }
+    .guess-form { display: flex; gap: 9px; justify-content: center; align-items: center; }
+    .guess-form input[type="text"] { box-sizing: border-box !important; width: min(280px, 58vw) !important; height: 42px !important; margin: 0 !important; padding: 0 10px !important; border: 1px solid #988360 !important; border-radius: 3px !important; background: #fffaf0 !important; color: #33291f !important; box-shadow: none !important; }
+    .guess-form input[type="text"]:focus { border-bottom: 1px solid #604b37 !important; box-shadow: 0 1px 0 #604b37 !important; }
+    .guess-form button { background: #604b37; }
+    .guess-form button:hover { background: #473729; }
+    #guessMessage { min-height: 1.4em; margin: 10px 0 0; font-weight: bold; }
+    #codeContainer { margin: 14px 0 0; padding: 13px; border: 2px dashed #8f784e; background: #e6d7b4; }
+    #codeContainer h3 { margin: 0 0 5px; color: #382c22; font-size: 1.2rem; }
+    #codeContainer p { margin: 0; }
+    .code-part { font: bold 1.5rem Arial, sans-serif; letter-spacing: .12em; }
+    .hidden { display: none; }
+    @media (max-width: 760px) {
+      .case-sheet { padding: 16px; }
+      .case-grid { grid-template-columns: 1fr; }
+      .suspect-card { grid-template-columns: 48px 1fr; }
+      .portrait { width: 48px; height: 60px; }
+    }
+    @media (max-width: 420px) {
+      .case-page { padding-inline: 10px; }
+      .case-sheet { padding: 12px; }
+      .suspect-list { gap: 6px; }
+      .suspect-card { grid-template-columns: 38px 1fr; gap: 6px; padding: 6px; }
+      .portrait { width: 38px; height: 52px; }
+      .suspect-card h3 { font-size: .96rem; }
+      .suspect-card p { font-size: .76rem; }
+      .guess-form { flex-wrap: wrap; }
+      .guess-form input[type="text"] { width: 100% !important; }
+    }
+  </style>
+</head>
+<body class="mision-regalo">
+  <div class="bg">
+    <nav class="brown lighten-3"><div class="nav-wrapper"><a href="../index.html" class="brand-logo" aria-label="Inicio"><i class="material-icons">home</i></a></div></nav>
+    <main class="container case-page">
+      <header class="case-heading">
+        <p class="eyebrow">Expediente 07 · Investigación abierta</p>
+        <h1>Hamburguesas de muerte</h1>
+        <p>Algo más que la carne de la hamburguesa acabó hecho picadillo. Averigua quién estuvo a solas con la víctima.</p>
+      </header>
+
+      <section class="case-sheet" aria-label="Expediente del caso">
+        <div class="case-grid">
+          <section>
+            <h2 class="section-title">Sospechosos</h2>
+            <div class="suspect-list">
+              <article class="suspect-card">
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Luna"><rect width="58" height="70" fill="#c4a987"/><path d="M5 70c2-17 12-24 24-24s22 7 24 24" fill="#4d5b56"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#e9c9a2"/><path d="M12 30C10 9 43 4 47 26l-5-5c-9 5-17 6-28 5z" fill="#392d29"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 4 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Luna</h3><p>Estaba en la esquina noroeste.</p></div>
+              </article>
+              <article class="suspect-card">
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Marcos"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#59616a"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#d9ad87"/><path d="M12 26C14 7 43 9 46 27l-8-7-22 4z" fill="#352a25"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 3 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Marcos</h3><p>Estaba en la fila de la víctima, dos columnas a su derecha.</p></div>
+              </article>
+              <article class="suspect-card">
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Nora"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#795c67"/><ellipse cx="29" cy="30" rx="15" ry="18" fill="#e6c3a0"/><path d="M12 34C7 5 49 5 46 36l-7-13-22 0z" fill="#533b31"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 4 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Nora</h3><p>Estaba en la última columna, en otra fila que Marcos.</p></div>
+              </article>
+              <article class="suspect-card">
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Pablo"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#59664f"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#bd8966"/><path d="M12 25C14 7 44 7 46 27l-8-8-18 1z" fill="#282725"/><path d="M17 35q12 18 24 0l-3 14H20z" fill="#49342d"/><circle cx="23" cy="30" r="1.5" fill="#302820"/><circle cx="35" cy="30" r="1.5" fill="#302820"/></svg>
+                <div><h3>Pablo</h3><p>Estaba en la última fila.</p></div>
+              </article>
+              <article class="suspect-card">
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Inés"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#75654e"/><ellipse cx="29" cy="30" rx="15" ry="18" fill="#e4bd98"/><path d="M12 32C7 9 47 4 46 31l-7-11-19 2z" fill="#6c4939"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M24 39q5 4 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><h3>Inés</h3><p>Estaba justo debajo de Pablo, una columna a su derecha.</p></div>
+              </article>
+              <article class="suspect-card">
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato ilustrado de Diego"><rect width="58" height="70" fill="#c4a987"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#526168"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#c8936e"/><path d="M12 26C12 8 45 7 46 27l-8-8-18 1z" fill="#332c29"/><circle cx="23" cy="31" r="1.5" fill="#302820"/><circle cx="35" cy="31" r="1.5" fill="#302820"/><path d="M23 39q6 3 12 0" fill="none" stroke="#75483d" stroke-width="2"/></svg>
+                <div><h3>Diego</h3><p>Estaba en la última fila, quinta columna.</p></div>
+              </article>
+              <article class="victim-card">
+                <svg class="portrait" viewBox="0 0 58 70" role="img" aria-label="Retrato de la víctima"><rect width="58" height="70" fill="#b4a48b"/><path d="M4 70c2-17 12-24 25-24s23 7 25 24" fill="#6d5147"/><ellipse cx="29" cy="30" rx="16" ry="19" fill="#d7b491"/><path d="M12 26C14 7 44 7 46 27l-8-8-18 1z" fill="#51453b"/><path d="M17 32h9m6 0h9m-15 0h6" stroke="#382c22" stroke-width="2"/><path d="M24 40q5 2 10 0" fill="none" stroke="#8d5147" stroke-width="1.5"/></svg>
+                <div><strong>La víctima</strong><p>Su posición está marcada en rojo en el plano. Estaba a solas con el asesino.</p></div>
+              </article>
+            </div>
+            <p class="rule-note"><strong>Reglas del plano:</strong> cada sospechoso ocupa una casilla distinta. No se repite fila ni columna. Las casillas ocupadas por muebles están bloqueadas. La sala está dividida en cuatro zonas; el asesino es quien comparte zona con la víctima y está a solas con ella.</p>
+          </section>
+
+          <section>
+            <h2 class="section-title">Plano de la hamburguesería</h2>
+            <p class="map-intro">Lee las pistas y sigue las filas, columnas y zonas del plano.</p>
+            <div class="map-frame">
+              <svg class="map-image" viewBox="0 0 620 560" role="img" aria-labelledby="map-title map-desc">
+                <title id="map-title">Plano cuadriculado de la hamburguesería</title>
+                <desc id="map-desc">Cuadrícula de seis filas y seis columnas, dividida en cocina, almacén, recepción y comedor. Las casillas grises con el símbolo de prohibido contienen muebles. La víctima está en la segunda fila y segunda columna.</desc>
+                <rect x="0" y="0" width="620" height="560" fill="#d2c29d"/>
+                <text x="310" y="27" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" letter-spacing="3" fill="#41372b">PLANO DEL LOCAL · 6 × 6</text>
+                <g font-family="Arial" font-size="11" font-weight="bold" fill="#554a3a">
+                  <text x="30" y="130">1</text><text x="30" y="198">2</text><text x="30" y="266">3</text><text x="30" y="334">4</text><text x="30" y="402">5</text><text x="30" y="470">6</text>
+                  <text x="111" y="530" text-anchor="middle">1</text><text x="193" y="530" text-anchor="middle">2</text><text x="275" y="530" text-anchor="middle">3</text><text x="357" y="530" text-anchor="middle">4</text><text x="439" y="530" text-anchor="middle">5</text><text x="521" y="530" text-anchor="middle">6</text>
+                </g>
+                <g>
+                  <rect x="70" y="85" width="246" height="207" fill="#d9cba9"/><rect x="316" y="85" width="246" height="207" fill="#cbbb97"/>
+                  <rect x="70" y="292" width="246" height="207" fill="#cbbb97"/><rect x="316" y="292" width="246" height="207" fill="#d9cba9"/>
+                  <g font-family="Arial" font-size="10" font-weight="bold" letter-spacing="1" fill="#6b5a3e">
+                    <text x="82" y="102">COCINA</text><text x="328" y="102">ALMACÉN</text><text x="82" y="309">RECEPCIÓN</text><text x="328" y="309">COMEDOR</text>
+                  </g>
+                </g>
+                <g fill="#aaa18f" stroke="#5c5347" stroke-width="2">
+                  <rect x="398" y="108" width="82" height="42" rx="5"/><rect x="480" y="176" width="82" height="42" rx="5"/>
+                  <rect x="152" y="244" width="82" height="42" rx="5"/><rect x="398" y="311" width="82" height="42" rx="5"/>
+                  <rect x="152" y="379" width="82" height="42" rx="5"/><rect x="234" y="447" width="82" height="42" rx="5"/>
+                </g>
+                <g fill="none" stroke="#675d50" stroke-width="3">
+                  <path d="M409 118h60v20h-60zM414 150v7m50-7v7"/><path d="M491 186h60v20h-60zM496 218v7m50-7v7"/>
+                  <path d="M163 254h60v20h-60zM168 286v7m50-7v7"/><path d="M409 321h60v20h-60zM414 353v7m50-7v7"/>
+                  <path d="M163 389h60v20h-60zM168 421v7m50-7v7"/><path d="M245 457h60v20h-60zM250 489v7m50-7v7"/>
+                </g>
+                <g font-family="Arial" font-size="8" font-weight="bold" text-anchor="middle" fill="#572f28">
+                  <text x="439" y="133">MOSTRADOR</text><text x="521" y="201">MESA</text><text x="193" y="269">ESTANTERÍA</text>
+                  <text x="439" y="336">MESA</text><text x="193" y="404">MESA</text><text x="275" y="472">MOSTRADOR</text>
+                </g>
+                <g fill="none" stroke="#a54636" stroke-width="4">
+                  <circle cx="464" cy="116" r="8"/><path d="m458 110 12 12m0-12-12 12"/><circle cx="546" cy="164" r="8"/><path d="m540 158 12 12m0-12-12 12"/>
+                  <circle cx="218" cy="232" r="8"/><path d="m212 226 12 12m0-12-12 12"/><circle cx="464" cy="300" r="8"/><path d="m458 294 12 12m0-12-12 12"/>
+                  <circle cx="218" cy="368" r="8"/><path d="m212 362 12 12m0-12-12 12"/><circle cx="300" cy="436" r="8"/><path d="m294 430 12 12m0-12-12 12"/>
+                </g>
+                <g fill="none" stroke="#342c24" stroke-width="2">
+                  <rect x="70" y="85" width="492" height="414"/>
+                  <path d="M152 85v414M234 85v414M316 85v414M398 85v414M480 85v414M70 154h492M70 223h492M70 292h492M70 361h492M70 430h492"/>
+                  <path d="M316 85v414M70 292h492" stroke-width="5"/>
+                </g>
+                <g>
+                  <circle cx="193" cy="188" r="26" fill="#a54636" stroke="#f3e6cc" stroke-width="3"/>
+                  <path d="M183 180c0-6 4-10 10-10s10 4 10 10v10h-20z" fill="#f3e6cc"/><path d="M177 201c2-9 7-13 16-13s14 4 16 13" fill="#f3e6cc"/>
+                </g>
+                <g font-family="Arial" font-size="8" font-weight="bold" fill="#6c2d23"><text x="193" y="219" text-anchor="middle">VÍCTIMA</text></g>
+              </svg>
+            </div>
+            <p class="map-key">X = casilla bloqueada por un mueble. No se puede colocar a ningún acusado ahí. La víctima está en la fila 2, columna 2.</p>
+            <div class="clue-box">
+              <h3>Notas de la investigación</h3>
+              <ul>
+                <li>Luna estaba en la esquina noroeste del plano.</li>
+                <li>Marcos estaba en la fila 2, dos columnas a la derecha de la víctima.</li>
+                <li>Nora estaba en la última casilla de la fila 3.</li>
+                <li>Pablo estaba en la fila 4, columna 2.</li>
+                <li>Inés estaba justo debajo de Pablo y una columna a su derecha.</li>
+                <li>Diego estaba en la última fila, columna 5.</li>
+              </ul>
+            </div>
+          </section>
+        </div>
+
+        <section class="answer-area">
+          <h2>¿Quién es el asesino?</h2>
+          <p>Escribe su nombre para comprobar tu respuesta y descubrir el código.</p>
+          <form id="guessForm" class="guess-form">
+            <input id="killerGuess" type="text" autocomplete="off" placeholder="Nombre del asesino" aria-label="Nombre del asesino" required>
+            <button class="btn waves-effect waves-light" type="submit">Acusar</button>
+          </form>
+          <p id="guessMessage" role="status" aria-live="polite"></p>
+          <div id="codeContainer" class="hidden" role="status" aria-live="polite">
+            <h3>¡Caso resuelto! La asesina es Luna.</h3>
+            <p>El código secreto es: <span class="code-part">5</span></p>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script>
+    const guessForm = document.getElementById("guessForm");
+    const guessInput = document.getElementById("killerGuess");
+    const guessMessage = document.getElementById("guessMessage");
+    const codeContainer = document.getElementById("codeContainer");
+
+    guessForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const guess = guessInput.value.trim().normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLocaleLowerCase("es");
+      if (guess === "luna") {
+        guessMessage.textContent = "";
+        codeContainer.classList.remove("hidden");
+      } else {
+        codeContainer.classList.add("hidden");
+        guessMessage.textContent = "Esa acusación no encaja con las pistas. Sigue investigando.";
+      }
+    });
+  </script>
+</body>
+</html>
