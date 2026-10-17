@@ -74,13 +74,14 @@
     </nav>
 
     <main class="container center-align">
-      <h2>📌 Introduce el código de 3 números</h2>
+      <h2>📌 Introduce el código de 4 números</h2>
       <p>Oh, oh, oh ✨</p>
 
       <div class="row center-align" style="margin-top: 30px;">
         <input id="uno" type="number" class="codigo-input" required>
         <input id="dos" type="number" class="codigo-input" required>
         <input id="tres" type="number" class="codigo-input" required>
+        <input id="cuatro" type="number" class="codigo-input" required>
       </div>
 
       <button id="comprobarBtn" class="btn brown lighten-2 waves-effect waves-light" type="button">
@@ -101,6 +102,7 @@
     const unoInput = document.getElementById("uno");
     const dosInput = document.getElementById("dos");
     const tresInput = document.getElementById("tres");
+    const cuatroInput = document.getElementById("cuatro");
     const comprobarBtn = document.getElementById("comprobarBtn");
     const codeContainer = document.getElementById("codeContainer");
 
@@ -108,9 +110,9 @@
       const uno = unoInput.value;
       const dos = dosInput.value;
       const tres = tresInput.value;
-
-      // Código correcto: 472, 815, 236
-      if (uno == 472 && dos == 815 && tres == 236) {
+      const cuatro = cuatroInput.value;
+      // Código correcto: 4, 8, 2, 5
+      if (uno == 4 && dos == 8 && tres == 2 && cuatro == 5) {
         M.toast({ html: "✅ ¡Código correcto!" });
         codeContainer.style.display = "block";
       } else {
